@@ -6,7 +6,6 @@ This project is a **Full Stack Product Management System** that allows the creat
 
 ```
 /
-/
 │   README.md
 ├───.qodo
 ├───frontend
