@@ -10,59 +10,64 @@ This project is a **Full Stack Product Management System** that allows the creat
 
 ```
 /
-├── README.md
-├── .qodo
-├── frontend
-│   ├── .gitignore
-│   ├── eslint.config.js
-│   ├── index.html
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── tailwind.config.jsx
-│   ├── vite.config.js
-│   ├── public
-│   │   └── vite.svg
-│   ├── src
-│   │   ├── App.css
-│   │   ├── App.jsx
-│   │   ├── index.css
-│   │   ├── main.jsx
-│   │   ├── assets
-│   │   ├── components
-│   │   │   ├── CategoryForm.jsx
-│   │   │   ├── ProductForm.jsx
-│   │   │   ├── SubCategoryForm.jsx
-│   │   ├── pages
-│   │   │   └── Dashboard.jsx
-│   │   └── services
-│   │       └── api.jsx
-├── server
-│   ├── .env
-│   ├── .gitignore
-│   ├── app.js
-│   ├── index.js
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── task_details.txt
-│   ├── constants
-│   │   └── .gitkeep
-│   ├── controllers
-│   │   ├── category.controller.js
-│   │   └── product.controller.js
-│   ├── database
-│   │   └── db.js
-│   ├── middlewares
-│   │   └── multer.middleware.js
-│   ├── models
-│   │   ├── category.model.js
-│   │   └── product.model.js
-│   ├── routes
-│   │   ├── category.route.js
-│   │   └── product.route.js
-│   ├── uploads
-│   └── utils
-│       ├── asyncWrapper.utils.js
-│       └── saveLocally.utils.js
+/
+│   README.md
+├───.qodo
+├───frontend
+│   │   .gitignore
+│   │   eslint.config.js
+│   │   index.html
+│   │   package-lock.json
+│   │   package.json
+│   │   README.md
+│   │   tailwind.config.jsx
+│   │   vite.config.js
+│   ├───.qodo
+│   ├───public
+│   │       vite.svg
+│   └───src
+│       │   App.css
+│       │   App.jsx
+│       │   index.css
+│       │   main.jsx
+│       ├───assets
+│       │       react.svg
+│       ├───components
+│       │       CategoryForm.jsx
+│       │       ProductForm.jsx
+│       │       SubCategoryForm.jsx
+│       ├───pages
+│       │       Dashboard.jsx
+│       └───services
+│               api.jsx
+└───server
+    │   .env
+    │   .gitignore
+    │   app.js
+    │   index.js
+    │   package-lock.json
+    │   package.json
+    │   task_details.txt
+    ├───.qodo
+    ├───constants
+    │       .gitkeep
+    ├───controllers
+    │       category.controller.js
+    │       product.controller.js
+    ├───database
+    │       db.js
+    ├───middlewares
+    │       multer.middleware.js
+    ├───models
+    │       category.model.js
+    │       product.model.js
+    ├───routes
+    │       category.route.js
+    │       product.route.js
+    ├───uploads
+    └───utils
+            asyncWrapper.utils.js
+            saveLocally.utils.js
 ```
 
 ## Features
