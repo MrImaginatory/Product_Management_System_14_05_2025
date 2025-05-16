@@ -29,7 +29,7 @@ const createProduct = asyncWrapper(async (req, res) => {
         const displayImagePath = saveImageLocally(req.files.displayImage[0]);
 
         const otherImageFiles = req.files.otherImages;
-        if (otherImageFiles.length > 5) {
+        if (otherImageFiles.length >= 50) {
             return res.status(400).json({ message: "You can upload up to 5 other images only." });
         }
         const otherImagePaths = otherImageFiles.map(file => saveImageLocally(file));

@@ -79,7 +79,7 @@ const productSchema = new mongoose.Schema(
 );
 
 function arrayLimit(val) {
-    return val.length <= 5;
+    return val.length <= 50;
 }
 
 const Product = mongoose.model("Product", productSchema);
