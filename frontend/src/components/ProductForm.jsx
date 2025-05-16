@@ -4,8 +4,7 @@ import {
   Dialog, DialogTitle, DialogContent, DialogActions,
   Button, TextField, MenuItem, InputLabel, Select,
   RadioGroup, FormControlLabel, Radio,
-  FormGroup, Checkbox,
-  Input
+  FormGroup, Checkbox, Input, Autocomplete
 } from '@mui/material';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -96,40 +95,27 @@ const ProductForm = ({ open, onClose }) => {
           onChange={e => setForm({ ...form, productName: e.target.value })}
         />
 
-        <InputLabel sx={{ mt: 2 }}>Category</InputLabel>
-        <Select
-          fullWidth
-          value={selectedCategory}
-          onChange={e => setSelectedCategory(e.target.value)}
-          displayEmpty
-        >
-          <MenuItem value="" disabled>Select Category</MenuItem>
-          {categories.map(cat => (
-            <MenuItem key={cat._id} value={cat._id}>
-              {cat.categoryName.charAt(0).toUpperCase() + cat.categoryName.slice(1)}
-            </MenuItem>
-          ))}
-        </Select>
-
-        <InputLabel sx={{ mt: 2 }}>SubCategories</InputLabel>
-        <Select
-          multiple
-          fullWidth
-          value={selectedSubCategories}
-          onChange={e => setSelectedSubCategories(e.target.value)}
-          renderValue={selected => selected.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(', ')}
-          displayEmpty
-          disabled={subCategories.length === 0}
-        >
-          {subCategories.length === 0 && (
-            <MenuItem disabled>No subcategories available</MenuItem>
+        <Autocomplete
+          options={categories}
+          getOptionLabel={(option) => option.categoryName.charAt(0).toUpperCase() + option.categoryName.slice(1)}
+          value={categories.find(cat => cat._id === selectedCategory) || null}
+          onChange={(event, newValue) => {
+            setSelectedCategory(newValue ? newValue._id : '');
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Category" margin="normal" fullWidth />
           )}
-          {subCategories.map((subCat, idx) => (
-            <MenuItem key={idx} value={subCat}>
-              {subCat.charAt(0).toUpperCase() + subCat.slice(1)}
-            </MenuItem>
-          ))}
-        </Select>
+        />
+
+        <Autocomplete
+        options={subCategories}
+        value={selectedSubCategories}
+        onChange={(event, newValue) => setSelectedSubCategories(newValue)}
+        renderInput={(params) => (
+          <TextField {...params} label="SubCategories" margin="normal" fullWidth />
+        )}
+        disabled={subCategories.length === 0}
+      />
 
         <InputLabel sx={{ mt: 2 }}>Display Image</InputLabel>
         <input

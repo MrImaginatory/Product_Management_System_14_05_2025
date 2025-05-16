@@ -76,4 +76,94 @@ const getProducts = asyncWrapper(async (req, res) => {
     res.status(200).json(products);
 });
 
-export {    createProduct, getProducts };
+const deleteProduct = asyncWrapper(async (req,res)=>{
+    try {
+        const { productId } = req.params; 
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(400).json({ message: "Product not found" });
+        }
+        await product.remove();
+        return res.status(200).json({    message: "Product deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting product:", error);
+        return res.status(500).json({
+            message: "Server error",
+            error: error.message,
+        });
+    }
+})
+
+const updateProduct = asyncWrapper(async (req, res) => {
+    try {
+        const { productId } = req.params;  // Get productId from the route parameters
+        const { productName, category, subCategories, availability, productType, stock, weight, mrp, salePrice, productDescription } = req.body;
+
+        // Find the product by ID
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(400).json({ message: "Product not found" });
+        }
+
+        // Check if category exists
+        const CategoryExists = await Category.findById({_id:category});
+        if (!CategoryExists) {
+            return res.status(400).json({ message: "Category does not exist" });
+        }
+
+        console.log("Category", CategoryExists);
+        
+
+        // Handle the productType if provided
+        let pt;
+        if (productType) {
+            pt = productType.split(',');
+        }
+
+        // Handle display image and other images
+        let displayImagePath = product.displayImage;  // Keep the old image path by default
+        if (req.files && req.files.displayImage) {
+            displayImagePath = saveImageLocally(req.files.displayImage[0]);  // Update if new displayImage is provided
+        }
+
+        let otherImagePaths = product.otherImages;  // Keep the old otherImages by default
+        if (req.files && req.files.otherImages) {
+            if (req.files.otherImages.length > 5) {
+                return res.status(400).json({ message: "You can upload up to 5 other images only." });
+            }
+            otherImagePaths = req.files.otherImages.map(file => saveImageLocally(file));  // Update otherImages if new ones are provided
+        }
+
+        const updatedProduct = await Product.findByIdAndUpdate(productId,{
+            $set: {
+                productName: productName,
+                category: category,
+                subCategories: subCategories,
+                displayImage: displayImagePath,
+                otherImages: otherImagePaths,
+                availability: availability,
+                productType: pt,
+                stock: stock,
+                weight: weight,
+                mrp: mrp ,
+                salePrice: salePrice,
+                productDescription: productDescription}
+        },{ new:true})
+
+        // Save the updated product
+        // const updatedProduct = await product.save();
+
+        return res.status(200).json({
+            message: "Product updated successfully",
+            product: updatedProduct,
+        });
+    } catch (error) {
+        console.error("Error updating product:", error);
+        return res.status(500).json({
+            message: "Server error",
+            error: error.message,
+        });
+    }
+});
+
+export {    createProduct, getProducts, updateProduct, deleteProduct };
