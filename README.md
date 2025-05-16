@@ -1,187 +1,147 @@
-# Full Stack Product Management System
+# Project Overview
 
-This project is a **Full Stack Product Management System** that allows the creation and management of categories, subcategories, and products. It utilizes an **Express.js** backend with **MongoDB** for data storage, and a **React** frontend built using **Vite** and **Material UI**.
+This project consists of a **frontend** built with React and Vite, and a **backend** built with Node.js and Express. The frontend communicates with the backend API running on `localhost:3001`. The application manages categories and products with forms for data entry and a dashboard for data display.
 
-## Project Structure
+---
+
+# Features
+
+- **Frontend:**
+  - React with Vite for fast development and build.
+  - Material UI (MUI) components and icons.
+  - CKEditor integration for rich text editing.
+  - React Hook Form for form handling.
+  - React Router for routing.
+  - TailwindCSS for styling.
+  - Axios for API communication.
+  - Two main forms:
+    - Category form with fields: Category Name, slug display, image upload, description (CKEditor).
+    - Product form with fields: category selection, subcategory selection, display image, multiple sub-images with thumbnails, availability radio buttons, product type checkboxes, stock, weight, MRP, sale price, description (CKEditor).
+  - Dashboard page displaying tables for categories and products with buttons to open forms in dialogs.
+
+- **Backend:**
+  - Node.js with Express framework.
+  - MongoDB database connection via Mongoose.
+  - REST API routes for categories and products.
+  - Middleware for file uploads using Multer.
+  - JWT for authentication (dependency present).
+  - CORS enabled.
+  - Environment variable configuration with dotenv.
+
+---
+
+# Frontend Setup
+
+## Prerequisites
+
+- Node.js (v16 or later recommended)
+- npm or yarn
+
+## Installation
+
+```bash
+cd frontend
+npm install
+```
+
+## Running the Development Server
+
+```bash
+npm run dev
+```
+
+This will start the Vite development server. Open your browser at `http://localhost:5173` (default Vite port) to view the app.
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+## Preview Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+# Backend Setup
+
+## Prerequisites
+
+- Node.js (v16 or later recommended)
+- npm or yarn
+- MongoDB instance running (local or remote)
+
+## Installation
+
+```bash
+cd server
+npm install
+```
+
+## Environment Variables
+
+Create a `.env` file in the `server` directory with the following variables:
+
+```
+PORT=3001
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+```
+
+Adjust values as needed.
+
+## Running the Server
+
+```bash
+npm start
+```
+
+This will start the server using nodemon and listen on the port specified in `.env`.
+
+---
+
+# Project Structure
 
 ```
 /
-│   README.md
-├───.qodo
-├───frontend
-│   │   .gitignore
-│   │   eslint.config.js
-│   │   index.html
-│   │   package-lock.json
-│   │   package.json
-│   │   README.md
-│   │   tailwind.config.jsx
-│   │   vite.config.js
-│   ├───.qodo
-│   ├───public
-│   │       vite.svg
-│   └───src
-│       │   App.css
-│       │   App.jsx
-│       │   index.css
-│       │   main.jsx
-│       ├───assets
-│       │       react.svg
-│       ├───components
-│       │       CategoryForm.jsx
-│       │       ProductForm.jsx
-│       │       SubCategoryForm.jsx
-│       ├───pages
-│       │       Dashboard.jsx
-│       └───services
-│               api.jsx
-└───server
-    │   .env
-    │   .gitignore
-    │   app.js
-    │   index.js
-    │   package-lock.json
-    │   package.json
-    │   task_details.txt
-    ├───.qodo
-    ├───constants
-    │       .gitkeep
-    ├───controllers
-    │       category.controller.js
-    │       product.controller.js
-    ├───database
-    │       db.js
-    ├───middlewares
-    │       multer.middleware.js
-    ├───models
-    │       category.model.js
-    │       product.model.js
-    ├───routes
-    │       category.route.js
-    │       product.route.js
-    ├───uploads
-    └───utils
-            asyncWrapper.utils.js
-            saveLocally.utils.js
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── services/
+│   ├── package.json
+│   ├── vite.config.js
+│   └── tailwind.config.jsx
+├── server/
+│   ├── controllers/
+│   ├── database/
+│   ├── middlewares/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   ├── uploads/
+│   ├── app.js
+│   ├── index.js
+│   └── package.json
+└── README.md
 ```
 
-## Features
+---
 
-### Backend (Express.js API)
+# Usage
 
-* **Create Category**: Allows the creation of a new category with a subcategory, slug, image, and description.
-* **Create Product**: Allows users to create a product by selecting a category, subcategory, and uploading images. Supports multiple images and product details.
-* **Database**: MongoDB is used to store categories, products, and related data.
-* **File Upload**: Images for categories and products are handled using **Multer** middleware.
-* **Error Handling**: Includes proper error handling via async/await functions using `asyncWrapper` for cleaner error management.
-
-### Frontend (React.js with Vite)
-
-* **Forms**: Responsive forms for creating categories, subcategories, and products.
-
-  * **Category Form**: Allows users to input category name, slug, description, and upload an image.
-  * **Product Form**: Users can add a product, select categories and subcategories, upload multiple images, and set product details like availability and price.
-* **Responsive Design**: Built using Material UI, ensuring the application works well on both desktop and mobile devices.
-* **Dashboard**: Displays the list of all categories and products in table format with options to create a new category, subcategory, or product.
+- Start the backend server first (`npm start` in `server` folder).
+- Start the frontend development server (`npm run dev` in `frontend` folder).
+- Use the frontend UI to add categories and products via the provided forms.
+- View the dashboard page to see the list of categories and products.
+- Forms open in dialog boxes with validation and image upload support.
 
 ---
 
-## Backend Setup
+# License
 
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/yourusername/your-repository-name.git
-   cd your-repository-name
-   ```
-
-2. **Install dependencies**:
-   In the `server` directory:
-
-   ```bash
-   npm install
-   ```
-
-3. **Setup Environment Variables**:
-   Create a `.env` file in the `server` directory with the following content:
-
-   ```env
-   MONGO_URI=mongodb://localhost:27017
-   MONGO_DB=your-database-name
-   PORT=3001
-   ```
-
-4. **Start the server**:
-
-   ```bash
-   npm start
-   ```
-
-   The server will be running on `http://localhost:3001`.
-
----
-
-## Frontend Setup (React.js with Vite)
-
-1. **Navigate to the frontend folder**:
-
-   ```bash
-   cd frontend
-   ```
-
-2. **Install dependencies**:
-
-   ```bash
-   npm install
-   ```
-
-3. **Configure API URL**:
-   In the `src/services/api.jsx` file, ensure the base URL points to the correct backend API (e.g., `http://localhost:3001`).
-
-   ```javascript
-   const API_URL = 'http://localhost:3001/api';
-   ```
-
-4. **Run the frontend**:
-
-   ```bash
-   npm run dev
-   ```
-
-   The frontend will be running on `http://localhost:5173` by default.
-
----
-
-## Frontend Forms Implementation
-1. **Product Form**:
-
-   * Input fields: `Category`, `Subcategory`, `Display Image`, `Sub Images`, `Availability`, `Product Type`, `Stock`, `Weight`, `MRP`, `Sale Price`, `Description (CKEditor)`, and `Submit` button.
-   * The form allows uploading multiple images and sending product data to the backend.
-
----
-
-## API Endpoints
-
-* **POST `/api/addCategory`**: Create a new category.
-* **POST `/api/addSubCategory`**: Create a new subcategory.
-* **POST `/api/addProduct`**: Create a new product.
-
-Each of these endpoints accepts `multipart/form-data` for handling file uploads.
-
----
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-### Notes:
-
-* This project is designed to be extensible. You can add more forms or update the existing ones as needed.
-* You can further enhance the UI by integrating additional Material UI components and making the app more interactive.
-* The server should be running on `http://localhost:3001` for the frontend to communicate with the API.
-
----
-
-This **`README.md`** is designed to help both developers and users understand how to set up and use the system. The project should work seamlessly if all steps are followed correctly!
+This project is licensed under the ISC License.
