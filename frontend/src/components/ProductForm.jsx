@@ -108,14 +108,17 @@ const ProductForm = ({ open, onClose }) => {
         />
 
         <Autocomplete
-        options={subCategories}
-        value={selectedSubCategories}
-        onChange={(event, newValue) => setSelectedSubCategories(newValue)}
-        renderInput={(params) => (
-          <TextField {...params} label="SubCategories" margin="normal" fullWidth />
-        )}
-        disabled={subCategories.length === 0}
-      />
+  multiple
+  options={subCategories}
+  getOptionLabel={(option) => option}
+  value={selectedSubCategories}
+  onChange={(event, newValue) => setSelectedSubCategories(newValue)}
+  renderInput={(params) => (
+    <TextField {...params} label="SubCategories" margin="normal" fullWidth />
+  )}
+  disabled={subCategories.length === 0}
+/>
+
 
         <InputLabel sx={{ mt: 2 }}>Display Image</InputLabel>
         <input
