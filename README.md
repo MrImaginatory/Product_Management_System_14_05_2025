@@ -1,7 +1,3 @@
-Here is a **`README.md`** file for your project that explains both the backend and frontend details. I’ve included a description of the project, the setup process for both the backend and frontend, and additional sections related to using Material UI for the frontend components.
-
----
-
 # Full Stack Product Management System
 
 This project is a **Full Stack Product Management System** that allows the creation and management of categories, subcategories, and products. It utilizes an **Express.js** backend with **MongoDB** for data storage, and a **React** frontend built using **Vite** and **Material UI**.
@@ -9,7 +5,6 @@ This project is a **Full Stack Product Management System** that allows the creat
 ## Project Structure
 
 ```
-/
 /
 │   README.md
 ├───.qodo
