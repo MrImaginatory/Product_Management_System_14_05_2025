@@ -110,7 +110,7 @@ const deleteCategory = asyncWrapper(async(req,res)=>{
     if (!category) {
         return res.status(400).json({ message: "Category not found" });
     }
-    await category.remove();
+    const deletedCategory = await Category.findByIdAndDelete(categoryId);
     return res.status(200).json({ message: "Category deleted successfully" });
 })
 

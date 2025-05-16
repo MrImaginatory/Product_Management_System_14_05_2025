@@ -5,9 +5,7 @@ import saveImageLocally from "../utils/saveLocally.utils.js";
 
 const createProduct = asyncWrapper(async (req, res) => {
     try {
-        console.log(req.body);
         
-
         let pt;
     
         if (!req.files || !req.files.displayImage || !req.files.otherImages) {
@@ -15,8 +13,6 @@ const createProduct = asyncWrapper(async (req, res) => {
         }
 
         const CategoryExists = await Category.findById({ _id: req.body.category });
-
-        console.log(typeof(CategoryExists.subCategories) ,typeof(req.body.subCategories));
 
         if (!CategoryExists) {
             return res.status(400).json({ message: "Category does not exist" });
@@ -83,7 +79,7 @@ const deleteProduct = asyncWrapper(async (req,res)=>{
         if (!product) {
             return res.status(400).json({ message: "Product not found" });
         }
-        await product.remove();
+        const deletedProduct = await Product.findByIdAndDelete(productId)
         return res.status(200).json({    message: "Product deleted successfully" });
     } catch (error) {
         console.error("Error deleting product:", error);
@@ -110,10 +106,6 @@ const updateProduct = asyncWrapper(async (req, res) => {
         if (!CategoryExists) {
             return res.status(400).json({ message: "Category does not exist" });
         }
-
-        console.log("Category", CategoryExists);
-        
-
         // Handle the productType if provided
         let pt;
         if (productType) {
